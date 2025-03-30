@@ -1093,6 +1093,14 @@ audio {
 	text-shadow: 5px 5px 5px #FFF;
 	display: none;
 }
+
+.signed {
+	text-align: center;
+	font-size: 22px !important;
+	margin-top: 30px !important;
+	font-weight: bold !important;
+}
+
 #b1,#b11 {
 	background-image: url('b1.png');
 }
@@ -1315,15 +1323,21 @@ audio {
 	left: 0;
 	width: 100%;
 	height: 100%;
-	background-color: rgba(0,0,0,0.7);
-	z-index: 1000;
-	display: flex;
+	background-color: rgba(0,0,0,0.85);
+	z-index: 9999;
 	justify-content: center;
 	align-items: center;
+	display: none;
 }
 
-#card, #card-front, #card-inside {
+#card-front, #card-inside {
 	height: 580px;
+}
+
+#card {
+	width: 800px;
+	height: 500px;
+	position: relative;
 }
 
 .wrap {
@@ -1331,16 +1345,27 @@ audio {
 	height: 100%;
 }
 
+#card-inside p {
+	background: #fff9f9 !important;
+	font-size: 20px !important;
+	color: #5c2a2a !important;
+	line-height: 1.5 !important;
+	margin-bottom: 15px !important;
+	text-shadow: none !important;
+}
+
 #card-front, #card-inside {
 	width: 50%;
-	box-shadow: 2px 2px 30px rgba(0, 0, 0, 0.25), 0 0 1px rgba(0, 0, 0, 0.5);
+	background: linear-gradient(135deg, #ff6b6b 0%, #ff8e8e 100%);
+	box-shadow: 0 10px 30px rgba(0,0,0,0.3);
 	position: absolute;
 	left: 50%;
 }
 
 #card-inside .wrap {
-	background: #FFEFEF;
-	box-shadow: inset 2px 0 1px rgba(0, 0, 0, 0.05);
+	background: #fff9f9;
+	padding: 30px;
+	box-shadow: inset 5px 0 10px rgba(0,0,0,0.05);
 }
 
 #card {
@@ -1357,9 +1382,12 @@ audio {
 	text-align: center;
 	font-family: 'Lobster', cursive;
 	font-style: italic;
-	font-size: 70px;
-	text-shadow: 4px 4px 0px rgba(0, 0, 0, 0.15), 1px 1px 0 #ffc8c8, 2px 2px 0 #ff9696, 3px 3px 0 #ff7d7d;
-	color: #FFF;
+	font-size: 60px;
+	margin-top: 40px;
+	text-shadow: 4px 4px 0px rgba(0,0,0,0.2),
+	2px 2px 0 #ffcccc,
+	3px 3px 0 #ff9999;
+	color: #fff;
 }
 
 #card-inside {
@@ -1426,6 +1454,24 @@ audio {
 	background-color: rgba(0, 0, 0, 0.5);
 }
 
+#open, #close {
+	background: #ff3366;
+	color: white;
+	border: none;
+	width: 40px;
+	height: 40px;
+	border-radius: 50%;
+	font-size: 24px;
+	cursor: pointer;
+	box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+	transition: all 0.3s ease;
+}
+
+#open:hover, #close:hover {
+	background: #ff0044;
+	transform: scale(1.1);
+}
+
 #card.open-fully #card-front,
 #card.close-half #card-front {
 	background: #FFEFEF;
@@ -1463,6 +1509,8 @@ audio {
 }
 
 .fuego {
+	background: #ff9900;
+	box-shadow: 0 0 20px 5px rgba(255,153,0,0.6);
 	border-radius: 100%;
 	position: absolute;
 	top: -20px;
@@ -1510,36 +1558,45 @@ audio {
 }
 
 .polaroid {
-	width: 240px;
-	height: 220px;
+	width: 250px;
+	height: 230px;
+	border: 10px solid #fff;
+	background: #fff;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+	transform: rotate(-5deg);
 	position: absolute;
 	float: left;
-	background: #1e1c18;
-	border: 7px solid #f5f5f5;
 	border-bottom: 50px solid #f5f5f5;
-	box-shadow: 0 0 6px -1px #000;
 	overflow: hidden;
 	left: 0;
 	right: 0;
 	margin: auto;
-	transform: rotate(-5deg);
 	clear: both;
 	backface-visibility: hidden;
+	animation: fade-in 20s ease-in;
+	/* Keep or add these: */
+	opacity: 1 !important; /* Force full visibility */
+	filter: brightness(1.1) contrast(1.1);
+	background-size: cover;
+	background-position: center;
 }
 
 .polaroid .img {
+	filter: brightness(1.05) contrast(1.1);
+	background-size: cover;
+	background-position: center;
 	width: 100%;
 	height: 100%;
 	backface-visibility: hidden;
-	background-position: center;
-	background-size: cover;
 	animation: fade-in 20s ease-in;
 	animation-iteration-count: 1;
 }
 
 .wishesFont {
 	font-family: 'Indie Flower', cursive;
-	font-weight: 800;
+	color: #5c2a2a !important;
+	text-shadow: none !important;
+	font-weight: bold !important;
 }
 
 @keyframes fade-in {

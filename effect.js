@@ -7,6 +7,7 @@ function handleCard() {
 	var card = document.getElementById('card'),
 		openB = document.getElementById('open'),
 		closeB = document.getElementById('close'),
+		cardContainer = $('#card-container'),
 		timer = null;
 
 	if (openB) {
@@ -16,7 +17,7 @@ function handleCard() {
 			timer = setTimeout(function() {
 				card.setAttribute('class', 'open-fully');
 				timer = null;
-			}, 1000);
+			}, 800); // Faster animation
 		});
 	}
 
@@ -26,12 +27,13 @@ function handleCard() {
 			if (timer) clearTimeout(timer);
 			timer = setTimeout(function() {
 				card.setAttribute('class', '');
-				$('#card-container').fadeOut('slow');
+				cardContainer.fadeOut(500); // Faster fade out
 				timer = null;
-			}, 1000);
+			}, 800);
 		});
 	}
 }
+
 $('document').ready(function(){
 		var vw;
 		$(window).resize(function(){
