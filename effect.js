@@ -2,6 +2,36 @@ $(window).load(function(){
 	$('.loading').fadeOut('fast');
 	$('.container').fadeIn('fast');
 });
+// Card functionality
+function handleCard() {
+	var card = document.getElementById('card'),
+		openB = document.getElementById('open'),
+		closeB = document.getElementById('close'),
+		timer = null;
+
+	if (openB) {
+		openB.addEventListener('click', function() {
+			card.setAttribute('class', 'open-half');
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(function() {
+				card.setAttribute('class', 'open-fully');
+				timer = null;
+			}, 1000);
+		});
+	}
+
+	if (closeB) {
+		closeB.addEventListener('click', function() {
+			card.setAttribute('class', 'close-half');
+			if (timer) clearTimeout(timer);
+			timer = setTimeout(function() {
+				card.setAttribute('class', '');
+				$('#card-container').fadeOut('slow');
+				timer = null;
+			}, 1000);
+		});
+	}
+}
 $('document').ready(function(){
 		var vw;
 		$(window).resize(function(){
@@ -163,36 +193,43 @@ $('document').ready(function(){
 			$('#story').fadeIn('slow');
 		});
 	});
-	
+
 	$('#story').click(function(){
 		$(this).fadeOut('slow');
 		$('.cake').fadeOut('fast').promise().done(function(){
 			$('.message').fadeIn('slow');
 		});
-		
+
 		var i;
 
 		function msgLoop (i) {
 			$("p:nth-child("+i+")").fadeOut('slow').delay(800).promise().done(function(){
-			i=i+1;
-			$("p:nth-child("+i+")").fadeIn('slow').delay(1000);
-			if(i==50){
-				$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
-					$('.cake').fadeIn('fast');
-				});
-				
-			}
-			else{
-				msgLoop(i);
-			}			
-
-		});
-			// body...
+				i=i+1;
+				$("p:nth-child("+i+")").fadeIn('slow').delay(1000);
+				if(i==50){
+					$("p:nth-child(49)").fadeOut('slow').promise().done(function () {
+						$('.cake').fadeIn('fast');
+						// Add the new button after message completes
+						$('<button class="btn btn-primary" id="open_card">Open Your Card</button>')
+							.insertAfter('#story')
+							.hide()
+							.fadeIn('slow')
+							.click(function() {
+								$('#card-container').fadeIn('slow');
+								$(this).fadeOut('slow');
+							});
+					});
+				}
+				else{
+					msgLoop(i);
+				}
+			});
 		}
-		
+
 		msgLoop(0);
-		
 	});
+
+	handleCard();
 });
 
 
